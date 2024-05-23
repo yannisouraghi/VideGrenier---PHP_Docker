@@ -13,6 +13,8 @@ session_start();
  */
 require dirname(__DIR__) . '/vendor/autoload.php';
 
+ini_set('display_errors', '1');
+
 
 /**
  * Error and Exception handling
