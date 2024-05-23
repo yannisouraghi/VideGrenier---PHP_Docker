@@ -10,14 +10,21 @@ Ce Readme.md est à destination des futurs repreneurs du site-web Vide Grenier e
 4. Lancez la commande `composer install` pour les dépendances
 
 ## Mise en place du projet front-end
+
 1. Lancez la commande `npm install` pour installer node-sass
 2. Lancez la commande `npm run watch` pour compiler les fichiers SCSS
 
+## Install composer dependencies on dev container
+
+```bash
+docker exec -it {CONTAINER_NAME} composer install
+```
+
 ## Routing
 
-Le [Router](Core/Router.php) traduit les URLs. 
+Le [Router](Core/Router.php) traduit les URLs.
 
-Les routes sont ajoutées via la méthode `add`. 
+Les routes sont ajoutées via la méthode `add`.
 
 En plus des **controllers** et **actions**, vous pouvez spécifier un paramètre comme pour la route suivante:
 
@@ -25,11 +32,10 @@ En plus des **controllers** et **actions**, vous pouvez spécifier un paramètre
 $router->add('product/{id:\d+}', ['controller' => 'Product', 'action' => 'show']);
 ```
 
-
 ## Vues
 
-Les vues sont rendues grâce à **Twig**. 
-Vous les retrouverez dans le dossier `App/Views`. 
+Les vues sont rendues grâce à **Twig**.
+Vous les retrouverez dans le dossier `App/Views`.
 
 ```php
 View::renderTemplate('Home/index.html', [
@@ -37,11 +43,12 @@ View::renderTemplate('Home/index.html', [
     'colours' => ['rouge', 'bleu', 'vert']
 ]);
 ```
+
 ## Models
 
 Les modèles sont utilisés pour récupérer ou stocker des données dans l'application. Les modèles héritent de `Core
 \Model
-` et utilisent [PDO](http://php.net/manual/en/book.pdo.php) pour l'accès à la base de données. 
+` et utilisent [PDO](http://php.net/manual/en/book.pdo.php) pour l'accès à la base de données.
 
 ```php
 $db = static::getDB();

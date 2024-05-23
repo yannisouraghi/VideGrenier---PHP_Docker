@@ -10,11 +10,13 @@ services:
       - internal
 
   php:
-    image: php:fpm-alpine
-    networks:
-      - internal
+    image: php-fpm-composer:1.0.0
+    build:
+      context: ./.docker/fpm
     volumes:
       - ./:/var/www/html
+    networks:
+      - internal
 
 networks:
   internal:
