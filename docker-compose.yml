@@ -1,0 +1,21 @@
+services:
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ./.docker/nginx:/etc/nginx/templates
+      - ./:/var/www/html
+    networks:
+      - internal
+
+  php:
+    image: php:fpm-alpine
+    networks:
+      - internal
+    volumes:
+      - ./:/var/www/html
+
+networks:
+  internal:
+    driver: bridge
