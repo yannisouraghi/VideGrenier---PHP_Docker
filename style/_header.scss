@@ -8,12 +8,12 @@
   top: 24px;
   cursor: pointer;
   z-index: 100;
-  @media only screen and(max-width: 1080px) {
+  @media only screen and (max-width: 1080px) {
     left: inherit;
     right: 30px;
     top: 100px;
   }
-  @media only screen and(max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     display: none !important;
   }
 }
@@ -71,13 +71,15 @@ ul.menu {
   .input-group {
     @include display-flex();
     & > span {
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         margin-left: auto;
       }
     }
   }
 
-  .input-group-addon, .input-group-btn, input {
+  .input-group-addon,
+  .input-group-btn,
+  input {
     width: auto;
     border: none;
     background-color: $c-divider;
@@ -126,33 +128,33 @@ ul.menu {
   }
 }
 .navbar-container {
-  @media only screen and(max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     min-height: 90px;
     padding-bottom: 0 !important;
     align-items: center;
     @include display-flex();
   }
   & > .container {
-    @media only screen and(max-width: 767px) {
+    @media only screen and (max-width: 767px) {
       width: 100%;
     }
   }
   &:not(.search-open) {
     .input-group-addon {
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         background-color: transparent;
       }
     }
     input,
     .input-group-btn {
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         display: none !important;
       }
     }
   }
   &.search-open {
     .topsearch {
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         position: absolute;
         left: 15px;
         right: 15px;
@@ -160,7 +162,7 @@ ul.menu {
         @include display-flex();
       }
       & > i {
-        @media only screen and(max-width: 767px) {
+        @media only screen and (max-width: 767px) {
           display: block;
           margin-right: 15px;
           font-size: 20px;
@@ -168,13 +170,13 @@ ul.menu {
       }
     }
     .input-group {
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         width: 100%;
       }
     }
     .btn-menu-toggle,
     .navbar-brand {
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         visibility: hidden !important;
       }
     }
@@ -220,22 +222,21 @@ ul.menu {
       text-decoration: underline;
     }
   }
-
 }
 
 .navbar-brand {
   padding: 12px 15px;
-  @media only screen and(max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     width: 100%;
     align-items: center;
     justify-content: center;
     @include display-flex();
   }
   span {
-    @media only screen and(min-width: 768px) {
+    @media only screen and (min-width: 768px) {
       display: none;
     }
-    @media only screen and(max-width: 767px) {
+    @media only screen and (max-width: 767px) {
       margin-left: 10px;
       margin-top: 4px;
       font-size: 20px;
@@ -252,8 +253,8 @@ ul.menu {
   &.single {
     padding: 0;
   }
-  [class^='col-'] {
-    @media only screen and(max-width: 767px) {
+  [class^="col-"] {
+    @media only screen and (max-width: 767px) {
       position: static;
     }
   }
@@ -281,7 +282,7 @@ ul.menu {
         background-color: $c-white;
         color: $c-green-up;
       }
-      a{
+      a {
         color: $c-white;
         &:hover {
           color: $c-green-up;
@@ -303,7 +304,7 @@ ul.menu {
   height: 50px;
   border-bottom: solid 1px $c-divider;
   color: $c-icon;
-  @media only screen and(max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     padding-bottom: 14px !important;
   }
   a {
@@ -321,7 +322,7 @@ ul.menu {
   }
   .h-icons {
     padding-top: 14px;
-    @media only screen and(max-width: 767px) {
+    @media only screen and (max-width: 767px) {
       justify-content: space-between;
       @include display-flex();
     }
@@ -344,7 +345,6 @@ ul.menu {
       left: 8px;
       top: 13px;
     }
-
   }
   .h-grid {
     padding-top: 14px;
@@ -389,13 +389,9 @@ ul.menu {
     height: auto;
     padding-bottom: 6px;
   }
-
-
 }
 
-
 @media (min-width: 100px) and (max-width: 767px) {
-
   .navbar-container {
     height: auto;
     padding-bottom: 15px;
@@ -415,10 +411,7 @@ ul.menu {
     height: auto;
     padding-bottom: 15px;
   }
-
 }
-
-
 
 .mobile-menu {
   position: fixed;
@@ -431,8 +424,8 @@ ul.menu {
   z-index: 100;
   overflow-y: auto;
   @include translate(-100%, 0);
-  @include transition(transform .5s);
-  @media only screen and(min-width: 768px) {
+  @include transition(transform 0.5s);
+  @media only screen and (min-width: 768px) {
     display: none !important;
   }
   .navbar-brand {
@@ -488,7 +481,7 @@ ul.menu {
       width: 70px;
       &::before {
         position: absolute;
-        content: '';
+        content: "";
         display: block;
         width: 14px;
         height: 14px;
@@ -575,7 +568,6 @@ ul.menu {
     }
     & > li {
       &:not(:last-child) a {
-
         border-bottom: solid 1px #eceff0;
       }
       li a {

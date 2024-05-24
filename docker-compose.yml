@@ -9,10 +9,10 @@ services:
     networks:
       - internal
 
-  php:
-    image: php-fpm-composer:1.0.0
+  php-fpm:
+    image: project/php-fpm-composer:1.0.0
     build:
-      context: ./.docker/fpm
+      context: ./.docker/php-fpm
     volumes:
       - ./:/var/www/html
     networks:
@@ -25,6 +25,7 @@ services:
       MARIADB_ROOT_PASSWORD: root
     volumes:
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - data:/var/lib/mysql
     networks:
       - internal
 
@@ -35,6 +36,17 @@ services:
       - 8000:8080
     networks:
       - internal
+
+  scss-compiler:
+    image: project/scss-compiler:1.0.0
+    build:
+      context: ./.docker/sass-compiler
+    volumes:
+      - ./style:/app/input
+      - ./public/style:/app/output
+
+volumes:
+  data:
 
 networks:
   internal:

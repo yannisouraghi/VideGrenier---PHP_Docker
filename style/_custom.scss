@@ -85,7 +85,7 @@ label.checkbox {
   height: 20px;
   cursor: pointer;
   background-color: $c-white;
-  @media only screen and(max-width: 767px) {
+  @media only screen and (max-width: 767px) {
     width: 24px;
     height: 24px;
     border-radius: 4px;
@@ -99,13 +99,13 @@ label.checkbox {
     left: -1px;
     border: solid 1px $c-active;
     border-radius: 2px;
-    @media only screen and(max-width: 767px) {
+    @media only screen and (max-width: 767px) {
       width: 24px;
       height: 24px;
       border-radius: 4px;
     }
     &::before {
-      content: '';
+      content: "";
       display: block;
       position: absolute;
       width: 12px;
@@ -115,7 +115,7 @@ label.checkbox {
       border-top: solid 2px $c-active;
       border-right: solid 2px $c-active;
       @include rotate(135deg);
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         width: 10px;
         height: 6px;
         top: 6px;
@@ -124,7 +124,9 @@ label.checkbox {
     }
   }
   input[type="checkbox"]:checked {
-    & + .arrow { display: block; }
+    & + .arrow {
+      display: block;
+    }
   }
   input[type="checkbox"] {
     display: none;
@@ -178,7 +180,6 @@ textarea {
     outline: none !important;
   }
 }
-
 
 //TYPOGRAPHY
 label.checkbox-text {
@@ -250,16 +251,44 @@ ul.list-inline {
       transform: rotateY(360deg);
       @include transition(1s);
     }
-    &.facebook { background-color: #3b5998; padding-top: 7px;}
-    &.twitter { background-color: #55acee; padding-top: 7px;}
-    &.google { background-color: #dd4b39; padding-top: 7px;}
-    &.pinterest { background-color: #cb2027; padding-top: 7px;}
-    &.btc { background-color: #ff6600;}
-    &.tumblr { background-color: #32506d; padding-top: 7px;}
-    &.vk { background-color: #45668e;}
-    &.reddit { background-color: white; color: #5f99cf; font-size: 30px; padding-top: 0;}
-    &.stumbleupon { background-color: #eb4924;}
-    &.odnoklassniki { background-color: #ed812b;}
+    &.facebook {
+      background-color: #3b5998;
+      padding-top: 7px;
+    }
+    &.twitter {
+      background-color: #55acee;
+      padding-top: 7px;
+    }
+    &.google {
+      background-color: #dd4b39;
+      padding-top: 7px;
+    }
+    &.pinterest {
+      background-color: #cb2027;
+      padding-top: 7px;
+    }
+    &.btc {
+      background-color: #ff6600;
+    }
+    &.tumblr {
+      background-color: #32506d;
+      padding-top: 7px;
+    }
+    &.vk {
+      background-color: #45668e;
+    }
+    &.reddit {
+      background-color: white;
+      color: #5f99cf;
+      font-size: 30px;
+      padding-top: 0;
+    }
+    &.stumbleupon {
+      background-color: #eb4924;
+    }
+    &.odnoklassniki {
+      background-color: #ed812b;
+    }
   }
 }
 
@@ -377,13 +406,38 @@ video {
           .mejs-time-total {
             .mejs-time-loaded {
               background: $c-blue-play;
-              background: rgba(77,134,254,.8);
-              background: -webkit-gradient(linear,0 0,0 100%,from(rgba(44,124,145,.8)),to(rgba(77,134,254,.8)));
-              background: -webkit-linear-gradient(top,rgba(44,124,145,.8),rgba(77,134,254,.8));
-              background: -moz-linear-gradient(top,rgba(44,124,145,.8),rgba(77,134,254,.8));
-              background: -o-linear-gradient(top,rgba(44,124,145,.8),rgba(77,134,254,.8));
-              background: -ms-linear-gradient(top,rgba(44,124,145,.8),rgba(77,134,254,.8));
-              background: linear-gradient(rgba(44,124,145,.8),rgba(77,134,254,.8));
+              background: rgba(77, 134, 254, 0.8);
+              background: -webkit-gradient(
+                linear,
+                0 0,
+                0 100%,
+                from(rgba(44, 124, 145, 0.8)),
+                to(rgba(77, 134, 254, 0.8))
+              );
+              background: -webkit-linear-gradient(
+                top,
+                rgba(44, 124, 145, 0.8),
+                rgba(77, 134, 254, 0.8)
+              );
+              background: -moz-linear-gradient(
+                top,
+                rgba(44, 124, 145, 0.8),
+                rgba(77, 134, 254, 0.8)
+              );
+              background: -o-linear-gradient(
+                top,
+                rgba(44, 124, 145, 0.8),
+                rgba(77, 134, 254, 0.8)
+              );
+              background: -ms-linear-gradient(
+                top,
+                rgba(44, 124, 145, 0.8),
+                rgba(77, 134, 254, 0.8)
+              );
+              background: linear-gradient(
+                rgba(44, 124, 145, 0.8),
+                rgba(77, 134, 254, 0.8)
+              );
             }
           }
         }
@@ -399,7 +453,7 @@ video {
     top: 0;
     left: 0;
     display: block;
-    content: '\e816';
+    content: "\e816";
     font-family: "circle-video";
     width: 66px;
     height: 66px;
@@ -419,8 +473,6 @@ video {
   }
 }
 
-
-
 //OTHER
 .login-window {
   div.checkbox > label {
@@ -432,7 +484,6 @@ video {
   }
 }
 
-
 .u-form {
   div.checkbox {
     label.checkbox {
@@ -441,12 +492,11 @@ video {
       margin-top: -3px;
       padding: 0 !important;
     }
-    &.checked label{
+    &.checked label {
       color: $c-active !important;
     }
   }
 }
-
 
 .form-group {
   input,
@@ -459,7 +509,7 @@ video {
   position: relative;
   padding-bottom: 56.25%;
   height: 0;
-  overflow:hidden;
+  overflow: hidden;
 }
 .video-responsive iframe,
 .video-responsive object,
@@ -482,7 +532,12 @@ video {
 }
 
 .account-header {
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/account.jpg');
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url("/images/account.jpg");
   background-size: cover;
   background-position: bottom;
   min-height: 400px;
@@ -497,7 +552,12 @@ video {
 }
 
 .add-header {
-  background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('/images/add-article.jpg');
+  background-image: linear-gradient(
+      0deg,
+      rgba(0, 0, 0, 0.3),
+      rgba(0, 0, 0, 0.3)
+    ),
+    url("/images/add-article.jpg");
   background-size: cover;
   background-position: center;
   min-height: 300px;
@@ -519,4 +579,3 @@ video {
     height: 100%;
   }
 }
-
