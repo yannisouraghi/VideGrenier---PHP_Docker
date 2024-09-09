@@ -3,21 +3,25 @@
 */
 
 .bg-image {
+  background-image: url("/images/account.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   text-align: center;
+
   img {
     width: 100%;
   }
 }
 
 .login-wraper {
+  min-height: calc(100vh - $navbar-height);
   position: relative;
   .login-window {
     position: absolute;
     width: 570px;
     top: 50%;
-    left: 50%;
-    margin-left: -2px;
-    margin-top: -288px;
+    left: calc(50% + 50px);
+    transform: translateY(-50%);
     .l-head {
       background-color: $c-white;
 
@@ -91,10 +95,8 @@
 
 .banner-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -580px;
+  top: 30%;
+  right: calc(50% + 50px);
   width: 550px;
   .line {
     height: 1px;
@@ -124,7 +126,11 @@
   }
 }
 
-@media (min-width: 100px) and (max-width: 1365px) {
+@media (max-width: 1365px) {
+  .bg-image {
+    background: none;
+  }
+
   .banner-text {
     position: relative;
     top: 0;
@@ -150,8 +156,10 @@
   }
 
   .login-wraper {
+    padding: 0 20px;
     .login-window {
       position: relative;
+      transform: none;
       width: auto;
       top: 0;
       left: 0;

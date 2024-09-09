@@ -2040,6 +2040,9 @@ footer .f-lang .btn-default {
 * Content Account
 */
 .bg-image {
+  background-image: url("/images/account.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   text-align: center;
 }
 .bg-image img {
@@ -2047,15 +2050,15 @@ footer .f-lang .btn-default {
 }
 
 .login-wraper {
+  min-height: calc(100vh - 70px);
   position: relative;
 }
 .login-wraper .login-window {
   position: absolute;
   width: 570px;
   top: 50%;
-  left: 50%;
-  margin-left: -2px;
-  margin-top: -288px;
+  left: calc(50% + 50px);
+  transform: translateY(-50%);
 }
 .login-wraper .login-window .l-head {
   background-color: #ffffff;
@@ -2130,10 +2133,8 @@ footer .f-lang .btn-default {
 
 .banner-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -580px;
+  top: 30%;
+  right: calc(50% + 50px);
   width: 550px;
 }
 .banner-text .line {
@@ -2163,7 +2164,10 @@ footer .f-lang .btn-default {
   text-align: left;
 }
 
-@media (min-width: 100px) and (max-width: 1365px) {
+@media (max-width: 1365px) {
+  .bg-image {
+    background: none;
+  }
   .banner-text {
     position: relative;
     top: 0;
@@ -2187,8 +2191,12 @@ footer .f-lang .btn-default {
     color: #a1a1a1;
     text-align: center;
   }
+  .login-wraper {
+    padding: 0 20px;
+  }
   .login-wraper .login-window {
     position: relative;
+    transform: none;
     width: auto;
     top: 0;
     left: 0;

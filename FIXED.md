@@ -1,0 +1,2 @@
+- Login / Register page
+- SQL "l'oeuilly" duplicate

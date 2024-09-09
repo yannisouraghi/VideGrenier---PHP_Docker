@@ -103,7 +103,7 @@ class User extends \Core\Controller
 
             $user = \App\Models\User::getByLogin($data['email']);
 
-            if (Hash::generate($data['password'], $user['salt']) !== $user['password']) {
+            if (!$user || Hash::generate($data['password'], $user['salt']) !== $user['password']) {
                 return false;
             }
 
