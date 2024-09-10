@@ -1316,10 +1316,6 @@ video {
   color: #ea2c5a;
 }
 
-.cb-content {
-  width: 130% !important;
-}
-
 /*
 * Content Index END
 */
@@ -2040,10 +2036,10 @@ footer .f-lang .btn-default {
 * Content Account
 */
 .bg-image {
-  background-image: url("/images/background.jpg");
+  background-image: url("/images/account.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-position: center;
+  text-align: center;
 }
 .bg-image img {
   width: 100%;
@@ -3023,12 +3019,6 @@ footer .f-lang .btn-default {
     margin: 0 auto;
     max-width: 340px;
   }
-}
-
-.error{
-  color: red;
-  font-size: 16px;
-  margin-top: 20px;
 }
 /*
 * Content Upload END

@@ -14,6 +14,8 @@ services:
     image: project/php-fpm-composer:1.0.0
     build:
       context: .docker/shared/php-fpm
+    env_file:
+      - .env
     volumes:
       - project_files:/app
     networks:
@@ -23,7 +25,10 @@ services:
     image: mariadb
     restart: always
     environment:
-      MARIADB_ROOT_PASSWORD: root
+      - MARIADB_RANDOM_ROOT_PASSWORD=true
+      - MARIADB_DATABASE=${DATABASE_NAME}
+      - MARIADB_USER=${DATABASE_USER}
+      - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - database_data:/var/lib/mysql

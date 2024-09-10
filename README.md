@@ -8,7 +8,10 @@ Ce Readme.md est à destination des futurs repreneurs du site-web Vide Grenier e
 
 ## Démarrage du projet en prod
 
-1. Lancez la commande
+1. Copy `.env.default` to `.env` and edit environment variables*
+
+
+2. Lancez la commande
 
 ```bash
 docker compose up
@@ -16,7 +19,10 @@ docker compose up
 
 ## Démarrage du projet en dev
 
-1. Lancez la commande
+1. Copy `.docker/dev/.env.default` to `.docker/dev/.env` and edit environment variables
+
+
+2. Lancez la commande
 
 ```bash
 docker compose -f .docker/dev/docker-compose.yml up -d
