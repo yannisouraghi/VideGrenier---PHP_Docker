@@ -26,8 +26,6 @@ class User extends Model {
         $stmt->bindParam(':password', $data['password']);
         $stmt->bindParam(':salt', $data['salt']);
 
-        $stmt->execute();
-
         return $db->lastInsertId();
     }
 
@@ -36,15 +34,28 @@ class User extends Model {
         $db = static::getDB();
 
         $stmt = $db->prepare("
-            SELECT * FROM users WHERE ( users.email = :email) LIMIT 1
+            SELECT * FROM users WHERE (email = :email) LIMIT 1
         ");
-
+        var_dump($login);
         $stmt->bindParam(':email', $login);
         $stmt->execute();
 
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public static function getUserCookiesById($userID)
+    {
+        $db = static::getDB();
+
+        $stmt = $db->prepare("
+            SELECT user_cookies FROM users WHERE id = :id
+        ");
+
+        $stmt->bindParam(':id', $userID);
+        $stmt->execute();
+
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 
     /**
      * ?
@@ -61,6 +72,5 @@ class User extends Model {
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
-
-
 }
+

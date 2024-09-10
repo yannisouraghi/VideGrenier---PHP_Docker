@@ -2040,10 +2040,10 @@ footer .f-lang .btn-default {
 * Content Account
 */
 .bg-image {
-  background-image: url("/images/account.jpg");
+  background-image: url("/images/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  text-align: center;
+  background-position: center;
 }
 .bg-image img {
   width: 100%;
@@ -3023,6 +3023,12 @@ footer .f-lang .btn-default {
     margin: 0 auto;
     max-width: 340px;
   }
+}
+
+.error{
+  color: red;
+  font-size: 16px;
+  margin-top: 20px;
 }
 /*
 * Content Upload END

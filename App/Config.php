@@ -39,4 +39,10 @@ class Config
      * @var boolean
      */
     const SHOW_ERRORS = true;
+
+    // Cookie Config
+
+    public const COOKIE_DEFAULT_EXPIRY = 604800;
+
+    public const COOKIE_USER = "user";
 }
