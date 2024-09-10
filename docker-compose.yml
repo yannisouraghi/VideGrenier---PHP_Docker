@@ -1,20 +1,21 @@
 services:
   web:
-    image: nginx:alpine
+    image: project/nginx-prod:1.0.0
+    build:
+      context: .
     ports:
       - "8080:80"
     volumes:
-      - ./.docker/nginx:/etc/nginx/templates
-      - ./:/var/www/html
+      - project_files:/app
     networks:
       - internal
 
   php-fpm:
     image: project/php-fpm-composer:1.0.0
     build:
-      context: ./.docker/php-fpm
+      context: .docker/shared/php-fpm
     volumes:
-      - ./:/var/www/html
+      - project_files:/app
     networks:
       - internal
 
@@ -25,28 +26,13 @@ services:
       MARIADB_ROOT_PASSWORD: root
     volumes:
       - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - data:/var/lib/mysql
+      - database_data:/var/lib/mysql
     networks:
       - internal
-
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8000:8080
-    networks:
-      - internal
-
-  scss-compiler:
-    image: project/scss-compiler:1.0.0
-    build:
-      context: ./.docker/sass-compiler
-    volumes:
-      - ./style:/app/input
-      - ./public/style:/app/output
 
 volumes:
-  data:
+  database_data:
+  project_files:
 
 networks:
   internal:

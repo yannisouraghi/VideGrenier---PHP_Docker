@@ -2,22 +2,24 @@
 
 Ce Readme.md est à destination des futurs repreneurs du site-web Vide Grenier en Ligne.
 
-## Mise en place du projet back-end
+## Prérequis
 
-1. Créez un VirtualHost pointant vers le dossier /public du site web (Apache)
-2. Importez la base de données MySQL (sql/import.sql)
-3. Connectez le projet et la base de données via les fichiers de configuration
-4. Lancez la commande `composer install` pour les dépendances
+- Docker engine > 27.2.1 ([https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/))
 
-## Mise en place du projet front-end
+## Démarrage du projet en prod
 
-1. Lancez la commande `npm install` pour installer node-sass
-2. Lancez la commande `npm run watch` pour compiler les fichiers SCSS
-
-## Install composer dependencies on dev container
+1. Lancez la commande
 
 ```bash
-docker exec -it {CONTAINER_NAME} composer install
+docker compose up
+```
+
+## Démarrage du projet en dev
+
+1. Lancez la commande
+
+```bash
+docker compose -f .docker/dev/docker-compose.yml up -d
 ```
 
 ## Routing
