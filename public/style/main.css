@@ -188,6 +188,12 @@ a.active {
   background-color: #ffffff;
 }
 
+.error {
+  color: red;
+  font-size: 16px;
+  margin-top: 20px;
+}
+
 /*
 * General Styles END
 */

@@ -18,7 +18,6 @@ class User extends Model {
      */
     public static function createUser($data) {
         $db = static::getDB();
-
         $stmt = $db->prepare('INSERT INTO users(username, email, password, salt) VALUES (:username, :email, :password,:salt)');
 
         $stmt->bindParam(':username', $data['username']);
@@ -26,6 +25,7 @@ class User extends Model {
         $stmt->bindParam(':password', $data['password']);
         $stmt->bindParam(':salt', $data['salt']);
 
+        $stmt->execute();
         return $db->lastInsertId();
     }
 
@@ -36,7 +36,6 @@ class User extends Model {
         $stmt = $db->prepare("
             SELECT * FROM users WHERE (email = :email) LIMIT 1
         ");
-        var_dump($login);
         $stmt->bindParam(':email', $login);
         $stmt->execute();
 
@@ -54,6 +53,29 @@ class User extends Model {
         $stmt->bindParam(':id', $userID);
         $stmt->execute();
 
+        return $stmt->fetch(\PDO::FETCH_ASSOC)["user_cookies"];
+    }
+
+    public static function deleteUserCookieByHash($hash){
+        $db = static::getDB();
+        $stmt = $db->prepare("update users set user_cookies = null WHERE user_cookies = :hash");
+        $stmt->bindParam(':hash', $hash);
+        $stmt->execute();
+    }
+
+    public static function getUserByHash($hash){
+        $db = static::getDB();
+        $stmt = $db->prepare("SELECT * FROM users WHERE user_cookies = :hash LIMIT 1");
+        $stmt->bindParam(':hash', $hash);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getUserById($userid){
+        $db = static::getDB();
+        $stmt = $db->prepare("SELECT * FROM users WHERE id = :userid");
+        $stmt->bindParam(':userid', $userid);
+        $stmt->execute();
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
@@ -71,6 +93,14 @@ class User extends Model {
         $stmt->execute([$id]);
 
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function addCookieToUserId($hash, $userID) {
+        $db = static::getDB();
+        $stmt = $db->prepare("update users set user_cookies = :hash where id = :id");
+        $stmt->bindParam(':hash', $hash);
+        $stmt->bindParam(':id', $userID);
+        $stmt->execute();
     }
 }
 
