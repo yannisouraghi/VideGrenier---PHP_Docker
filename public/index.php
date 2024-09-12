@@ -47,6 +47,7 @@ try {
 } catch(Exception $e){
     switch($e->getMessage()){
         case 'You must be logged in':
+            \App\Utility\Flash::danger($e -> getMessage());
             header('Location: /login');
             break;
     }

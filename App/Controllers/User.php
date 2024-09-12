@@ -13,6 +13,7 @@ use Exception;
 use http\Env\Request;
 use http\Exception\InvalidArgumentException;
 use App\Utility\Input;
+use App\Utility\Auth;
 
 /**
  * User controller
@@ -30,12 +31,12 @@ class User extends \Core\Controller
 
             // TODO: Validation
             
-            $this->login($f);
-
+            $result = $this->login($f);
             // Si login OK, redirige vers le compte
-            header('Location: /account');
+            if($result){
+                header('Location: /account');
+            }
         }
-
         View::renderTemplate('User/login.html', [
             'message' => Flash::getMessage()
         ]);
@@ -58,6 +59,7 @@ class User extends \Core\Controller
             $this->register($f);
             // TODO: Rappeler la fonction de login pour connecter l'utilisateur
             $this->login($f);
+            header('Location: /account');
         }
         View::renderTemplate('User/register.html', [
             'message' => Flash::getMessage()
@@ -86,12 +88,12 @@ class User extends \Core\Controller
             // hashing process.
 
             $salt = Hash::generateSalt(32);
-
+            
             $userID = \App\Models\User::createUser([
                 "email" => $data['email'],
                 "username" => $data['username'],
                 "password" => Hash::generate($data['password'], $salt),
-                "salt" => $salt
+                "salt" => $salt, 
             ]);
 
             return $userID;
@@ -103,55 +105,60 @@ class User extends \Core\Controller
         }
     }
 
-    private function login($data){
+    private function login($data): bool
+    {
         try {
             if(!isset($data['email'])){
-                throw new InvalidArgumentException('Email manquant');
+                Flash::danger('email manquant');
             }
+
             if(!isset($data['password'])){
-                throw new InvalidArgumentException('Mot de passe manquant');
-            }
-            $user = \App\Models\User::getByLogin($data['email']);
-            var_dump($user);
-            if (!$user || Hash::generate($data['password'], $user['salt']) !== $user['password']) {
+                Flash::danger('mot de passe manquant');
                 return false;
             }
-            // TODO: Create a remember me cookie if the user has selected the option
-            // to remained logged in on the login form.
-            // https://github.com/andrewdyer/php-mvc-register-login/blob/development/www/app/Model/UserLogin.php#L86
-            $remember = self::post("remember") ? true : false;
-            if ($remember and !self::createRememberCookie($user['id'])) {
-                throw new Exception("Une erreur est survenue.");
+
+            $user = \App\Models\User::getByLogin($data['email']);
+            if (!$user || Hash::generate($data['password'], $user['salt']) !== $user['password']) {
+                Flash::danger('Identifiants incorrects');
+                return false;
             }
+
+            $checked = false;
+            if (isset($_POST['remember']) && $_POST['remember'] == "on") {
+                $checked = true;
+            }
+
+            if ($checked and !self::createRememberCookie($user['id'])) {
+                throw new Exception();
+            }
+
             $_SESSION['user'] = array(
                 'id' => $user['id'],
                 'username' => $user['username'],
             );
 
             return true;
-
         } catch (Exception $ex) {
-            // TODO : Set flash if error
-            /* Utility\Flash::danger($ex->getMessage());*/
-            Flash::danger($ex -> getMessage());
+            Flash::danger('Une erreur s\'est produite');
+            return false;
         }
     }
 
-    public static function createRememberCookie($userID) {
-        $check = \App\Models\User::getUserCookiesById($userID);
-        if ($check) {
-            $hash = $check['user_cookies'];
-        } else {
-            $hash = Utility\Hash::generateUnique();
-            if (!$Db->insert("user_cookies", ["id" => $userID, "user_cookies" => $hash])) {
-                return false;
+    public static function createRememberCookie($userID): bool
+    {
+        try {
+            $check = \App\Models\User::getUserCookiesById($userID);
+            if ($check) {
+                $hash = $check;
+            } else {
+                $hash = Hash::generateUnique();
+                \App\Models\User::addCookieToUserId($hash, $userID);
             }
+            return (setcookie(Config::REMEMBER_COOKIE_NAME, $hash, time() + Config::REMEMBER_COOKIE_EXPIRY, "/"));
+        } catch (Exception $ex) {
+            var_dump($ex);
+            return false;
         }
-        //$cookie = $_COOKIE("COOKIE_USER");
-        $cookie = Config::COOKIE_DEFAULT_EXPIRY;
-        //$expiry = get("COOKIE_DEFAULT_EXPIRY");
-        $expiry = Config::COOKIE_USER;
-        return(setcookie($cookie, $hash, time() + $expiry, "/"));
     }
 
     public static function LoginWithCookies(){
@@ -183,11 +190,17 @@ class User extends \Core\Controller
      */
     public function logoutAction() {
 
-        /*
-        if (isset($_COOKIE[$cookie])){
-            // TODO: Delete the users remember me cookie if one has been stored.
-            // https://github.com/andrewdyer/php-mvc-register-login/blob/development/www/app/Model/UserLogin.php#L148
-        }*/
+
+        if (isset($_COOKIE[Config::REMEMBER_COOKIE_NAME])){
+            $hash = $_COOKIE[Config::REMEMBER_COOKIE_NAME];
+            try {
+                \App\Models\User::deleteUserCookieByHash($hash);
+            }
+            catch (Exception $ex) {
+                var_dump($ex);
+            }
+            setcookie(Config::REMEMBER_COOKIE_NAME, '', time() - 1);
+        }
         // Destroy all data registered to the session.
 
         $_SESSION = array();

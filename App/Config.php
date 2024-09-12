@@ -15,9 +15,15 @@ class Config
      */
     const SHOW_ERRORS = true;
 
-    // Cookie Config
+    /**
+     * The remember cookie name.
+     * @var string
+     */
+    public const REMEMBER_COOKIE_NAME = "user";
 
-    public const COOKIE_DEFAULT_EXPIRY = 604800;
-
-    public const COOKIE_USER = "user";
+    /**
+     * The remember cookie expiry time.
+     * @var integer
+     */
+    public const REMEMBER_COOKIE_EXPIRY = 60 * 60 * 24 * 30;
 }
