@@ -2,7 +2,7 @@ services:
   web:
     image: project/nginx-prod:1.0.0
     build:
-      context: .docker/shared/nginx
+      context: ../shared/nginx
     ports:
       - "8080:80"
     volumes:
@@ -13,7 +13,7 @@ services:
   php-fpm:
     image: project/php-fpm-composer:1.0.0
     build:
-      context: .docker/shared/php-fpm
+      context: ../shared/php-fpm
     env_file:
       - .env
     volumes:
@@ -30,7 +30,7 @@ services:
       - MARIADB_USER=${DATABASE_USER}
       - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
-      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ../../sql/init.sql:/docker-entrypoint-initdb.d/init.sql
       - database_data:/var/lib/mysql
     networks:
       - internal

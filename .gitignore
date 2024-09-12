@@ -3,4 +3,4 @@ vendor
 composer.lock
 node_modules
 .env
-.docker/dev/.env
+.docker/*/.env

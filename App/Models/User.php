@@ -43,6 +43,7 @@ class User extends Model {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    // TODO
     public static function getUserCookiesById($userID)
     {
         $db = static::getDB();
