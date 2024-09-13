@@ -28,8 +28,6 @@ class User extends \Core\Controller
     {
         if(isset($_POST['submit'])){
             $f = $_POST;
-
-            // TODO: Validation
             
             $result = $this->login($f);
             // Si login OK, redirige vers le compte
@@ -59,7 +57,9 @@ class User extends \Core\Controller
             $this->register($f);
             // TODO: Rappeler la fonction de login pour connecter l'utilisateur
             $this->login($f);
+
             header('Location: /account');
+
         }
         View::renderTemplate('User/register.html', [
             'message' => Flash::getMessage()
@@ -93,7 +93,7 @@ class User extends \Core\Controller
                 "email" => $data['email'],
                 "username" => $data['username'],
                 "password" => Hash::generate($data['password'], $salt),
-                "salt" => $salt, 
+                "salt" => $salt,
             ]);
 
             return $userID;
@@ -135,8 +135,8 @@ class User extends \Core\Controller
             $_SESSION['user'] = array(
                 'id' => $user['id'],
                 'username' => $user['username'],
+                'is_admin' => $user['is_admin'],
             );
-
             return true;
         } catch (Exception $ex) {
             Flash::danger('Une erreur s\'est produite');
@@ -159,25 +159,6 @@ class User extends \Core\Controller
             var_dump($ex);
             return false;
         }
-    }
-
-    public static function LoginWithCookies(){
-        $cookie = get("COOKIE_USER");
-        if (isset($_COOKIE[$cookie])) {
-            $Db = static::getDB();
-            $check = $Db->select("user_cookies", ["hash", "=", $_COOKIE[$cookie]]);
-            if ($check->count()) {
-                $user = $Db->select("users", ["id", "=", $check->first()->id]);
-                if ($user->count()) {
-                    $_SESSION['user'] = array(
-                        'id' => $user->first()->id,
-                        'username' => $user->first()->username,
-                    );
-                    return true;
-                }
-            }
-        }
-        return false;
     }
 
 

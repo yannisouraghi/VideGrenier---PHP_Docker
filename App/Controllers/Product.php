@@ -21,7 +21,7 @@ class Product extends \Core\Controller
     {
 
         if(isset($_POST['submit'])) {
-            $result = self::addProductAction();
+            $result = self::addProduct();
 
            if($result){
                return;
@@ -33,7 +33,7 @@ class Product extends \Core\Controller
         ]);
     }
 
-    public function addProductAction(){
+    public function addProduct(){
         try {
             $validation_errors = [];
 

@@ -40,6 +40,13 @@ class Articles extends Model {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public static function getCountAll(){
+        $db = static::getDB();
+        $query = 'SELECT COUNT(*) FROM articles';
+        $stmt = $db->query($query);
+        return $stmt->fetchColumn();
+    }
+
     /**
      * ?
      * @access public

@@ -12,6 +12,7 @@ class Auth {
         {
             $user = User::getUserById($_SESSION['user']['id']);
             if ($user != null){
+                $_SESSION['user']['is_admin'] = $user['is_admin'];
                 return true;
             }else {
                 return false;
@@ -26,6 +27,7 @@ class Auth {
             $_SESSION['user'] = array(
                 'id' => $user['id'],
                 'username' => $user['username'],
+                'is_admin' => $user['is_admin'],
             );
             return true;
         }

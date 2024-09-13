@@ -62,7 +62,7 @@ class View
     public static function setDefaultVariables($args = []){
 
         $args["user"] = isset($_SESSION['user']) ? $_SESSION['user'] : null;
-
+        $args["admin"] = isset($_SESSION['user']['is_admin']) ? $_SESSION['user']['is_admin'] : false;
         return $args;
     }
 }

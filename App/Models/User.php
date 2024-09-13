@@ -103,5 +103,32 @@ class User extends Model {
         $stmt->bindParam(':id', $userID);
         $stmt->execute();
     }
+
+    public static function getCountAll(){
+        $db = static::getDB();
+        $stmt = $db->prepare("SELECT COUNT(*) FROM users");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    public static function getAll(){
+        $db = static::getDB();
+        $stmt = $db->prepare("SELECT * FROM users");
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getTodaysUser(){
+        $db = static::getDB();
+        $stmt = $db->prepare("SELECT COUNT(*) FROM visits where date = CURRENT_DATE");
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    public static function addTodaysUser(){
+        $db = static::getDB();
+        $stmt = $db->prepare("INSERT INTO visits(date) VALUES(CURRENT_DATE)");
+        $stmt->execute();
+    }
 }
 

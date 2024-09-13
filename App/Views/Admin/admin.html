@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block title %}Mon compte {% endblock %}
+
+{% block body %}
+
+<div class="channel">
+
+    <div class="container-fluid admin-header">
+        <div class="row">
+            <div class="admin-title">
+                <div class="admin-title-text">
+                    <h1> Admin Panel </h1>
+                </div>
+            </div>
+            <div class="admin-body-container">
+
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid admin-body">
+        <div class="row">
+            <div class="NbArticles">
+                <h2> Nombre Articles</h2>
+                <div class="data">
+                    {{ nbArt }}
+                </div>
+            </div>
+            <div class="NbUsers">
+                <h2> Nombre Users</h2>
+                <div class="data">
+                    {{ nbUsers }}
+                </div>
+            </div>
+            <div class="TodayVisits">
+                <h2> Visite aujourd'hui</h2>
+                <div class="data">
+                    {{ nbTodaysUser }}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="ListUsers">
+                <h2> List users</h2>
+                <div class="data">
+                    <ol>
+                        {% for user in listUser %}
+                        <li> {{ user.email }} {{ user.username }} </li>
+                        {% endfor %}
+                    </ol>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -3029,3 +3029,10 @@ footer .f-lang .btn-default {
 /*
 * Content Upload END
 */
+/*
+* Content Admin
+*/
+.admin-title-text {
+  text-align: center;
+  color: purple;
+}
