@@ -161,5 +161,4 @@ class Articles extends Model {
 
 
 
-
 }

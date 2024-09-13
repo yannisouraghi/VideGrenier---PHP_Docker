@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+
+{% block title %}Mon compte {% endblock %}
+
+{% block body %}
+
+<div class="channel">
+
+    <div class="container-fluid admin-header">
+        <div class="row">
+            <div class="admin-title">
+                <div class="admin-title-text">
+                    <h1> Fking contact page </h1>
+                </div>
+            </div>
+            <div class="container">
+                <div class="admin-body">
+
+                {% if message is defined %}
+                <div class="alert alert-success">
+                    {{ message }}
+                </div>
+                {% endif %}
+
+                <div class="title name-article">
+                    {{ article.name }}
+                </div>
+                <div class="description-article">
+                    {{ article.description }}
+                </div>
+                <p> {{ toEmail }}</p>
+            </div>
+            <div class="contact-form">
+                <div class="u-form">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="name">Nom:</label>
+                                <input type="text" value="{{ inputs.name|default('') }}" name="name" id="name" placeholder="Nom Complet">
+                                <small>{{ errors.name|default('') }}</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" value="{{ inputs.email|default('') }}" placeholder="Adresse Email">
+                                <small>{{ errors.email|default('') }}</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="subject">Sujet:</label>
+                                <input type="text" name="subject" id="subject" value="{{ inputs.subject|default('') }}" placeholder="Demande concernant..">
+                                <small>{{ errors.subject|default('') }}</small>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <div class="form-group">
+                                <label for="message">Message:</label>
+                                <textarea id="message" name="message" rows="5">{{ inputs.message|default('') }}</textarea>
+                                <small>{{ errors.message|default('') }}</small>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="u-area mt-small">
+                    <form action="#" method="post">
+                        <button name="submit" class="btn btn-primary u-btn">Envoyer</button>
+                    </form>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+{% endblock %}

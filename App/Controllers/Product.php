@@ -91,7 +91,6 @@ class Product extends \Core\Controller
         } catch(\Exception $e){
             var_dump($e);
         }
-
         View::renderTemplate('Product/Show.html', [
             'article' => $article[0],
             'suggestions' => $suggestions

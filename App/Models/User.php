@@ -130,5 +130,13 @@ class User extends Model {
         $stmt = $db->prepare("INSERT INTO visits(date) VALUES(CURRENT_DATE)");
         $stmt->execute();
     }
+
+    public static function getEmailbyUserId($id) {
+        $db = static::getDB();
+        $stmt = $db->prepare("SELECT email FROM users WHERE id = :id");
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
 }
 
