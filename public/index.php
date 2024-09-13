@@ -6,6 +6,8 @@
  * PHP version 7.0
  */
 
+use App\Utility\Flash;
+
 session_start();
 
 /**
@@ -37,9 +39,9 @@ $router->add('logout', ['controller' => 'User', 'action' => 'logout', 'private' 
 $router->add('account', ['controller' => 'User', 'action' => 'account', 'private' => true]);
 $router->add('product', ['controller' => 'Product', 'action' => 'index', 'private' => true]);
 $router->add('product/{id:\d+}', ['controller' => 'Product', 'action' => 'show']);
+$router->add('admin', ['controller' => 'Admin', 'action' => 'admin', 'admin_only' => true]);
+$router->add('contact', ['controller' => 'Contact', 'action' => 'index']);
 $router->add('{controller}/{action}');
-$router->add('admin', ['controller' => 'Admin', 'action' => 'admin']);
-$router->add('product/{id:\d+}/contact', ['controller' => 'Contact', 'action' => 'contact']);
 
 /*
  * Gestion des erreurs dans le routing
@@ -49,8 +51,11 @@ try {
 } catch(Exception $e){
     switch($e->getMessage()){
         case 'You must be logged in':
-            \App\Utility\Flash::danger($e -> getMessage());
+            Flash::danger($e -> getMessage());
             header('Location: /login');
+            break;
+        default:
+            header('Location: /');
             break;
     }
 }
