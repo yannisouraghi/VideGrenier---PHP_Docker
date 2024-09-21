@@ -119,6 +119,10 @@ class Router
                     throw new \Exception("You must be logged in");
                 }
 
+                if(isset($this->params['admin_only']) && !Auth::checkIfUserIsAdmin()){
+                    throw new \Exception("You must be admin to reach this page");
+                }
+
                 $controller_object = new $controller($this->params);
 
                 $action = $this->params['action'];

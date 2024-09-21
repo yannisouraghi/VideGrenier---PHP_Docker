@@ -3032,7 +3032,44 @@ footer .f-lang .btn-default {
 /*
 * Content Admin
 */
-.admin-title-text {
-  text-align: center;
-  color: purple;
+.admin-dashboard {
+  padding: 40px 0;
+  min-height: calc(100vh - 70px);
+}
+.admin-dashboard .admin-dashboard-data {
+  padding: 20px;
+  display: grid;
+}
+.admin-dashboard .admin-dashboard-data > div {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px;
+  border-radius: 8px;
+  border: 1px #ddd solid;
+}
+.admin-dashboard .admin-dashboard-data > div h2, .admin-dashboard .admin-dashboard-data > div p {
+  margin: 0;
+  padding: 0;
+}
+.admin-dashboard .admin-dashboard-data > div h2 {
+  opacity: 0.8;
+  font-size: 18px;
+  letter-spacing: 0.5px;
+}
+.admin-dashboard .admin-dashboard-data > div p {
+  font-size: 24px;
+  margin-top: 12px;
+  line-height: 20px;
+}
+.admin-dashboard .admin-user-table {
+  margin-top: 20px;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px #ddd solid;
+}
+.admin-dashboard .admin-user-table td, .admin-dashboard .admin-user-table th {
+  padding: 20px 80px 20px 20px;
+  min-width: 250px;
 }

@@ -4,56 +4,47 @@
 
 {% block body %}
 
-<div class="channel">
-
-    <div class="container-fluid admin-header">
-        <div class="row">
-            <div class="admin-title">
-                <div class="admin-title-text">
-                    <h1> Admin Panel </h1>
-                </div>
-            </div>
-            <div class="admin-body-container">
-
+<div class="container admin-dashboard">
+    <div class="row gx-5">
+        <div class="admin-dashboard-data col col-md-4">
+            <div>
+                <h2>Nombre Articles</h2>
+                <p>{{ nbArt }}</p>
             </div>
         </div>
-    </div>
-    <div class="container-fluid admin-body">
-        <div class="row">
-            <div class="NbArticles">
-                <h2> Nombre Articles</h2>
-                <div class="data">
-                    {{ nbArt }}
-                </div>
-            </div>
-            <div class="NbUsers">
-                <h2> Nombre Users</h2>
-                <div class="data">
-                    {{ nbUsers }}
-                </div>
-            </div>
-            <div class="TodayVisits">
-                <h2> Visite aujourd'hui</h2>
-                <div class="data">
-                    {{ nbTodaysUser }}
-                </div>
+        <div class="admin-dashboard-data col col-md-4">
+            <div>
+                <h2>Nombre Users</h2>
+                <p>{{ nbUsers }}</p>
             </div>
         </div>
-        <div class="row">
-            <div class="ListUsers">
-                <h2> List users</h2>
-                <div class="data">
-                    <ol>
-                        {% for user in listUser %}
-                        <li> {{ user.email }} {{ user.username }} </li>
-                        {% endfor %}
-                    </ol>
-
-                </div>
+        <div class="admin-dashboard-data col col-md-4">
+            <div>
+                <h2>Visite aujourd'hui</h2>
+                <p>{{ nbTodaysUser }}</p>
             </div>
         </div>
     </div>
 
+    <div class="admin-user-table">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Nom d'utilisateur</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for user in listUser %}
+                    <tr>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td style="width: 100%"></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {% endblock %}

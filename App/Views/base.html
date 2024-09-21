@@ -68,10 +68,12 @@
                                     <span class="caret"></span>
                                 </button>
                                 <ul class="dropdown-menu">
-                                    {% if admin %}
-                                    <li><a href="/admin">Admin Panel</a></li>
-                                    {%endif %}
                                     <li><a href="/account">Mon compte</a></li>
+
+                                    {% if admin %}
+                                        <li><a href="/admin">Page administrateur</a></li>
+                                    {%endif %}
+
                                     <li><a href="/logout">Déconnexion</a></li>
                                 </ul>
                             </div>
