@@ -40,7 +40,7 @@ $router->add('account', ['controller' => 'User', 'action' => 'account', 'private
 $router->add('product', ['controller' => 'Product', 'action' => 'index', 'private' => true]);
 $router->add('product/{id:\d+}', ['controller' => 'Product', 'action' => 'show']);
 $router->add('admin', ['controller' => 'Admin', 'action' => 'admin', 'admin_only' => true]);
-$router->add('contact', ['controller' => 'Contact', 'action' => 'index']);
+$router->add('product/{id:\d+}/contact', ['controller' => 'Contact', 'action' => 'contact']);
 $router->add('{controller}/{action}');
 
 /*

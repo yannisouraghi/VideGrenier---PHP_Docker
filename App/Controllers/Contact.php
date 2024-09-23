@@ -31,7 +31,7 @@ class Contact extends Controller {
                 if ($this->sendEmail($inputs['email'], $inputs['subject'], $inputs['message'], $toEmail['email'])) {
                     Flash::addMessage("Votre message a été envoyé avec succès !");
                 } else {
-                    Flash::addMessage("Une erreur s'est produite lors de l'envoi de l'email.");
+                    Flash::danger("Une erreur s'est produite lors de l'envoi de l'email.");
                 }
                 $message = Flash::getMessage();
             }
@@ -73,12 +73,12 @@ class Contact extends Controller {
 
         try {
             $mail->isSMTP();
-            $mail->Host = 'smtp-relay.brevo.com';
+            $mail->Host = $_ENV['SMTP_HOST'];
             $mail->SMTPAuth = true;
-            $mail->Username = '7c8699002@smtp-brevo.com';
-            $mail->Password = 'AVcIkHyzLfCJ3F5j';
+            $mail->Username = $_ENV['SMTP_USER'];
+            $mail->Password = $_ENV['SMTP_PASSWORD'];
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-            $mail->Port = 587;
+            $mail->Port = $_ENV['SMTP_PORT'];
 
             $mail->setFrom($fromEmail, 'Vide Grenier - Le site de Matheo et Yannis !');
             $mail->addAddress($toEmail);

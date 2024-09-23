@@ -63,7 +63,13 @@ class Product extends \Core\Controller
             }
 
             $_POST['user_id'] = $_SESSION['user']['id'];
-            $id = Articles::save($_POST);
+
+            if(Articles::getVille($_POST['ville']) > 0){
+                $id = Articles::save($_POST);
+            } else {
+                Flash::danger('Ville inconnu');
+                return false;
+            }
 
             $pictureName = Upload::uploadFile($_FILES['picture'], $id);
 
@@ -93,7 +99,8 @@ class Product extends \Core\Controller
         }
         View::renderTemplate('Product/Show.html', [
             'article' => $article[0],
-            'suggestions' => $suggestions
+            'suggestions' => $suggestions,
+            'product_id' => $id,
         ]);
     }
 }
