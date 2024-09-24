@@ -64,7 +64,7 @@ class Articles extends Model {
 
         $stmt->execute([$id]);
 
-        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
     /**
@@ -133,7 +133,7 @@ class Articles extends Model {
     public static function save($data) {
         $db = static::getDB();
 
-        $stmt = $db->prepare('INSERT INTO articles(name, description, user_id, published_date) VALUES (:name, :description, :user_id,:published_date)');
+        $stmt = $db->prepare('INSERT INTO articles(name, description, user_id, published_date, city_id) VALUES (:name, :description, :user_id, :published_date, :city_id)');
 
         $published_date =  new DateTime();
         $published_date = $published_date->format('Y-m-d');
@@ -141,6 +141,7 @@ class Articles extends Model {
         $stmt->bindParam(':description', $data['description']);
         $stmt->bindParam(':published_date', $published_date);
         $stmt->bindParam(':user_id', $data['user_id']);
+        $stmt->bindParam(':city_id', $data['city_id']);
 
         $stmt->execute();
 

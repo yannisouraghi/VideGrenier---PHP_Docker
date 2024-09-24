@@ -15,34 +15,36 @@ class Contact extends Controller {
     public function contactAction() {
         $id = $this->route_params['id'];
 
-        Articles::addOneView($id);
-        $article = Articles::getOne($id);
-        $toEmail = User::getEmailbyUserId($article[0]['user_id']);
+        try {
+            Articles::addOneView($id);
+            $article = Articles::getOne($id);
+            $toEmail = User::getEmailbyUserId($article['user_id']);
 
-        $inputs = [];
-        $errors = [];
-        $message = '';
+            $inputs = [];
+            $errors = [];
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $inputs = $_POST;
-            $errors = $this->validate($inputs);
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $inputs = $_POST;
+                $errors = $this->validate($inputs);
 
-            if (empty($errors)) {
-                if ($this->sendEmail($inputs['email'], $inputs['subject'], $inputs['message'], $toEmail['email'])) {
-                    Flash::addMessage("Votre message a été envoyé avec succès !");
-                } else {
-                    Flash::danger("Une erreur s'est produite lors de l'envoi de l'email.");
+                if (empty($errors)) {
+                    if ($this->sendEmail($inputs['email'], $inputs['subject'], $inputs['message'], $toEmail['email'])) {
+                        Flash::addMessage("Votre message a été envoyé avec succès !");
+                    } else {
+                        Flash::danger("Une erreur s'est produite lors de l'envoi de l'email.");
+                    }
                 }
-                $message = Flash::getMessage();
             }
+        } catch (Exception $e) {
+            Flash::danger("Une erreur s'est produite lors de l'envoi de l'email.");
         }
 
         View::renderTemplate('Contact/contact.html', [
-        'article' => $article[0],
-        'toEmail' => $toEmail['email'],
-        'inputs' => $inputs,
-        'errors' => $errors,
-        'message' => $message
+            'article' => $article,
+            'toEmail' => $toEmail['email'],
+            'inputs' => $inputs,
+            'errors' => $errors,
+            'message' => Flash::getMessage()
         ]);
     }
 
@@ -75,6 +77,7 @@ class Contact extends Controller {
             $mail->isSMTP();
             $mail->Host = $_ENV['SMTP_HOST'];
             $mail->SMTPAuth = true;
+            $mail->Timeout  = 30;
             $mail->Username = $_ENV['SMTP_USER'];
             $mail->Password = $_ENV['SMTP_PASSWORD'];
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
@@ -96,9 +99,7 @@ class Contact extends Controller {
             $mail->Body    = nl2br("Merci de nous avoir contacte. Nous avons bien recu votre message et votre destinataire vous repondra des que posssible.");
 
             return $mail->send();
-
-        } catch (Exception $e) {
-            echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+        } catch (Exception) {
             return false;
         }
     }

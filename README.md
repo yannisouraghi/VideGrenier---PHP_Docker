@@ -28,6 +28,12 @@ docker compose up
 docker compose -f .docker/dev/docker-compose.yml up -d
 ```
 
+## Lancer les tests unitaires
+
+```bash
+docker exec {FPM_CONTAINER_NAME} composer run-script test
+```
+
 ## Routing
 
 Le [Router](Core/Router.php) traduit les URLs.

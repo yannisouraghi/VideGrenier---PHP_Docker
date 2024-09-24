@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use App\Models\Articles;
+use App\Models\Cities;
 use App\Utility\Flash;
 use App\Utility\Upload;
 use \Core\View;
@@ -45,8 +46,8 @@ class Product extends \Core\Controller
                 $validation_errors[] = 'La description est requise';
             }
 
-            if(empty($_POST['ville']) || $_POST['ville'] == '') {
-                $validation_errors[] = 'La ville est requis';
+            if(empty($_POST['city_id']) || $_POST['city_id'] == '') {
+                $validation_errors[] = 'La ville est requise';
             }
 
             if(empty($_FILES['picture'])) {
@@ -55,22 +56,25 @@ class Product extends \Core\Controller
 
             if (count($validation_errors) > 0) {
                 $validation_errors_string = "Une ou plusieurs erreurs sont survenues : \n";
+
                 foreach ($validation_errors as $error) {
                     $validation_errors_string .= '- ' . $error . " \n";
                 }
+
                 Flash::danger($validation_errors_string);
                 return false;
             }
 
             $_POST['user_id'] = $_SESSION['user']['id'];
 
-            if(Articles::getVille($_POST['ville']) > 0){
-                $id = Articles::save($_POST);
-            } else {
+            $city = Cities::getById($_POST['city_id']);
+
+            if(!isset($city)){
                 Flash::danger('Ville inconnu');
                 return false;
             }
 
+            $id = Articles::save($_POST);
             $pictureName = Upload::uploadFile($_FILES['picture'], $id);
 
             Articles::attachPicture($id, $pictureName);
@@ -97,8 +101,9 @@ class Product extends \Core\Controller
         } catch(\Exception $e){
             var_dump($e);
         }
+
         View::renderTemplate('Product/Show.html', [
-            'article' => $article[0],
+            'article' => $article,
             'suggestions' => $suggestions,
             'product_id' => $id,
         ]);

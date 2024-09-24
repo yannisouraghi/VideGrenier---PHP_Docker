@@ -1,4 +1,6 @@
 FROM php:8.3.7-fpm-alpine
+
+WORKDIR /app
  
 # RUN rm /etc/apt/preferences.d/no-debian-php
 #     && apt-get update && apt-get install -y \

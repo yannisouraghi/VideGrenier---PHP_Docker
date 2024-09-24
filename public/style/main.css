@@ -46,7 +46,6 @@ a:focus {
   border-radius: 3px;
   border: solid 1px #e0e1e2;
   padding: 15px 18px;
-  height: 46px;
 }
 
 .form-group {
@@ -718,6 +717,10 @@ video {
 
 .mb-40 {
   margin-bottom: 40px;
+}
+
+.account-wrapper {
+  min-height: calc(100vh - 70px);
 }
 
 .account-header {
@@ -2835,10 +2838,6 @@ footer .f-lang .btn-default {
   text-align: center;
   color: #7e7e7e;
 }
-.upload-page .u-area {
-  padding-top: 150px;
-  padding-bottom: 150px;
-}
 .upload-page .u-area i {
   font-size: 144px;
   color: #637076;
@@ -2991,8 +2990,6 @@ footer .f-lang .btn-default {
 }
 .edit-page .u-area {
   text-align: center;
-  padding-top: 65px;
-  padding-bottom: 20px;
 }
 .edit-page .u-area .u-btn {
   margin-top: 0;
@@ -3002,10 +2999,6 @@ footer .f-lang .btn-default {
 }
 
 @media only screen and (max-width: 767px) {
-  .upload-page .u-area {
-    padding-top: 90px;
-    padding-bottom: 50px;
-  }
   .upload-page .u-area.mt-small {
     padding-top: 20px;
   }
@@ -3072,4 +3065,32 @@ footer .f-lang .btn-default {
 .admin-dashboard .admin-user-table td, .admin-dashboard .admin-user-table th {
   padding: 20px 80px 20px 20px;
   min-width: 250px;
+}
+
+.contact-wrapper {
+  min-height: calc(100vh - 70px);
+  padding: 40px 0;
+}
+
+.contact-grid {
+  padding: 20px 0;
+}
+.contact-grid .contact-article-image {
+  height: 300px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.contact-grid .contact-article-image img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.contact-grid h2 {
+  margin: 20px 0;
+  font-size: 24px;
+}
+.contact-grid .form-group small {
+  display: block;
+  margin-top: 10px;
+  color: red;
 }

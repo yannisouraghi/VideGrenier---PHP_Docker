@@ -2,21 +2,18 @@
 
 namespace App\Models;
 
-use App\Utility\Hash;
 use Core\Model;
-use App\Core;
-use Exception;
-use App\Utility;
 
 /**
  * City Model:
  */
 class Cities extends Model {
-
     public static function search($str) {
         $db = static::getDB();
 
-        $stmt = $db->prepare('SELECT ville_id FROM villes_france WHERE ville_nom_reel LIKE :query');
+        $str = strtolower($str);
+
+        $stmt = $db->prepare('SELECT ville_id,ville_code_postal,ville_nom_reel FROM villes_france WHERE ville_nom_simple LIKE :query');
 
         $query = $str . '%';
 
@@ -24,6 +21,13 @@ class Cities extends Model {
 
         $stmt->execute();
 
-        return $stmt->fetchAll(\PDO::FETCH_COLUMN, 0);
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public static function getById($id) {
+        $db = static::getDB();
+        $stmt = $db->prepare('SELECT * FROM villes_france WHERE ville_id = :id');
+        $stmt->execute(['id' => $id]);
+        return $stmt->fetch(\PDO::FETCH_UNIQUE);
     }
 }
