@@ -17,7 +17,7 @@
 
     <div class="container mt-30">
         <form action="" method="post" enctype="multipart/form-data">
-            <div class="row">
+            <div class="row justify-content-center">
                 <div class="col-lg-6">
                     <div class="u-form">
                         <div class="row">
@@ -37,8 +37,9 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="e4">Ville</label>
-                                    <input class="form-control cityAutoComplete" type="text" autocomplete="on" id ="e4" name="ville" required/>
+                                    <label for="city">Ville</label>
+                                    <input id="city" class="form-control basicAutoComplete" type="text" autocomplete="off" name="city">
+                                    <input id="city_id" name="city_id" type="hidden" />
                                 </div>
                             </div>
 
@@ -52,7 +53,9 @@
                     </div>
 
                     <div class="u-area mt-small">
-                        <p class="error">{{ message | nl2br}}</p>
+                        {% if message is not null %}
+                        <p class="error">{{ message.body | nl2br}}</p>
+                        {% endif %}
                         <form action="#" method="post">
                             <button name="submit" class="btn btn-primary u-btn">Valider</button>
                         </form>
@@ -69,15 +72,21 @@
 {% endblock body %}
 
 {% block javascript %}
-
     <script type="text/javascript">
-        $('.cityAutoComplete').autoComplete({
+        $('.basicAutoComplete').autoComplete({
             resolver: 'custom',
+            formatResult: function (item) {
+                return {
+                    value: item.ville_id.toString(),
+                    text: `${item.ville_nom_reel}`,
+                    html: `${item.ville_nom_reel} (${item.ville_code_postal})`
+                };
+            },
             events: {
                 search: function (qry, callback) {
                     // let's do a custom ajax call
                     $.ajax(
-                        "/api/cities" + '?query=' + qry,
+                        '/api/cities',
                         {
                             data: { 'query': qry}
                         }
@@ -87,9 +96,9 @@
                 }
             }
         });
+
+        $('.basicAutoComplete').on('autocomplete.select', function (evt, item) {
+            $("#city_id").val(item.ville_id)
+        });
     </script>
-
-
-
-
 {% endblock %}

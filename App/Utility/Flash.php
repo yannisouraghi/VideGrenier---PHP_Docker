@@ -15,9 +15,10 @@ class Flash{
         if(isset($_SESSION['flash_notifications'])){
             $messages = $_SESSION['flash_notifications'];
             unset($_SESSION['flash_notifications']);
-            //return $messages->body;
-            return $messages['body'];
+            return $messages;
         }
+
+        return null;
     }
 
     public static function danger($message){
