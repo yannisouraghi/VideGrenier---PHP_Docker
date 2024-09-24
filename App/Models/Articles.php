@@ -133,12 +133,13 @@ class Articles extends Model {
     public static function save($data) {
         $db = static::getDB();
 
-        $stmt = $db->prepare('INSERT INTO articles(name, description, user_id, published_date) VALUES (:name, :description, :user_id,:published_date)');
+        $stmt = $db->prepare('INSERT INTO articles(name, description, ville, user_id, published_date) VALUES (:name, :description, :ville, :user_id,:published_date)');
 
         $published_date =  new DateTime();
         $published_date = $published_date->format('Y-m-d');
         $stmt->bindParam(':name', $data['name']);
         $stmt->bindParam(':description', $data['description']);
+        $stmt->bindParam(':ville', $data['ville']);
         $stmt->bindParam(':published_date', $published_date);
         $stmt->bindParam(':user_id', $data['user_id']);
 
@@ -159,6 +160,13 @@ class Articles extends Model {
         $stmt->execute();
     }
 
-
+    public static function getVille($ville){
+        $db = static::getDB();
+        $ville = strtolower($ville);
+        $stmt = $db->prepare('SELECT COUNT(*) FROM villes_france WHERE ville_nom_simple = :ville');
+        $stmt->bindParam(':ville', $ville);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
 
 }

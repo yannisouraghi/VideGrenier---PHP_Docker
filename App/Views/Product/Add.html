@@ -37,8 +37,8 @@
 
                             <div class="col-lg-12">
                                 <div class="form-group">
-                                    <label for="e2">Ville</label>
-                                    <input class="form-control cityAutoComplete" type="text" autocomplete="off" required/>
+                                    <label for="e4">Ville</label>
+                                    <input class="form-control cityAutoComplete" type="text" autocomplete="on" id ="e4" name="ville" required/>
                                 </div>
                             </div>
 
@@ -69,6 +69,7 @@
 {% endblock body %}
 
 {% block javascript %}
+
     <script type="text/javascript">
         $('.cityAutoComplete').autoComplete({
             resolver: 'custom',
@@ -76,7 +77,7 @@
                 search: function (qry, callback) {
                     // let's do a custom ajax call
                     $.ajax(
-                        '/api/cities',
+                        "/api/cities" + '?query=' + qry,
                         {
                             data: { 'query': qry}
                         }
@@ -87,4 +88,8 @@
             }
         });
     </script>
+
+
+
+
 {% endblock %}

@@ -59,6 +59,16 @@
 {% block javascript %}
     <script type="text/javascript">
 
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+                    console.log('Service Worker enregistré avec succès : ', registration.scope);
+                }, function(err) {
+                    console.log('Échec de l\'enregistrement du Service Worker : ', err);
+                });
+            });
+        }
+
         function getProductsAndRender(option = ''){
             $.ajax({
                 url: "/api/products" + '?sort=' + option,
