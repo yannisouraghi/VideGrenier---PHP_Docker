@@ -131,7 +131,7 @@ class User extends Controller
             ]);
 
             return true;
-        } catch (Exception) {
+        } catch (Exception $e) {
             Flash::danger('Erreur lors de la création de l\'utilisateur');
             return false;
         }
@@ -177,7 +177,7 @@ class User extends Controller
             );
 
             return true;
-        } catch (Exception) {
+        } catch (Exception $e) {
             Flash::danger('Une erreur inconnue s\'est produite');
             return false;
         }
@@ -201,7 +201,7 @@ class User extends Controller
 
             setcookie(Config::REMEMBER_COOKIE_NAME, $hash, time() + Config::REMEMBER_COOKIE_EXPIRY, "/");
             return true;
-        } catch (Exception) {
+        } catch (Exception $e) {
             return false;
         }
     }
