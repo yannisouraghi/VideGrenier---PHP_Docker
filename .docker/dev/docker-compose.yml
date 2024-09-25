@@ -2,7 +2,7 @@ services:
   web:
     image: nginx:1.27.1-alpine
     ports:
-      - "8080:80"
+      - "8090:80"
     volumes:
       - ../shared/nginx:/etc/nginx/templates
       - ../../:/app
@@ -30,7 +30,7 @@ services:
       - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
       - ../../sql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - data:/var/lib/mysql
+      - database_data_dev:/var/lib/mysql
     networks:
       - internal
 
@@ -51,7 +51,7 @@ services:
       - ../../public/style:/app/output
 
 volumes:
-  data:
+  database_data_dev:
 
 networks:
   internal:

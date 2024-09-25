@@ -6,7 +6,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - project_files:/app
+      - project_files_stage:/app
     networks:
       - internal
 
@@ -17,7 +17,7 @@ services:
     env_file:
       - .env
     volumes:
-      - project_files:/app
+      - project_files_stage:/app
     networks:
       - internal
 
@@ -31,13 +31,13 @@ services:
       - MARIADB_PASSWORD=${DATABASE_PASSWORD}
     volumes:
       - ../../sql/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - database_data:/var/lib/mysql
+      - database_data_stage:/var/lib/mysql
     networks:
       - internal
 
 volumes:
-  database_data:
-  project_files:
+  database_data_stage:
+  project_files_stage:
 
 networks:
   internal:
