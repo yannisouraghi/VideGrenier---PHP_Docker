@@ -25,9 +25,8 @@ FROM nginx:1.27.1-alpine AS runtime
 
 WORKDIR /app
 
-RUN usermod -u 1000 nginx
-
 COPY --from=composer --chown=nginx:nginx /app /app
 COPY --from=scss-compiler --chown=nginx:nginx /app/public/style /app/public/style
-COPY --chown=nginx:nginx . /etc/nginx/templates
+COPY --chown=nginx:nginx .docker/shared/nginx /etc/nginx/templates
 
+RUN chmod -R 755 /app
