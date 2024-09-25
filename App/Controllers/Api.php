@@ -41,4 +41,25 @@ class Api extends \Core\Controller
         header('Content-Type: application/json');
         echo json_encode($cities);
     }
+
+    /**
+     * Recherche des articles
+     * @throws Exception
+     */
+    public function SearchAction(){
+
+        try {
+
+            $query = $_GET['param'];
+
+            $articles = Articles::getByName($query);
+
+            header('Content-Type: application/json');
+
+            echo json_encode($articles);
+
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
+    }
 }

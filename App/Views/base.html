@@ -49,13 +49,12 @@
                 </div>
 
                 <div class="col-lg-6 col-sm-8 col-12">
-                    <!--<form action="search.html" method="post">
+                    <!--<form onsubmit="research(event)">
                         <div class="topsearch">
                             <i class="cv cvicon-cv-cancel topsearch-close"></i>
                             <div class="input-group">
                                 <span class="input-group-addon" id="sizing-addon2"><i class="fa fa-search"></i></span>
-                                <input type="text" class="form-control" placeholder="Rechercher..."
-                                       aria-describedby="sizing-addon2">
+                                <input type="text" id="searchInput" class="form-control" placeholder="Rechercher..." aria-describedby="sizing-addon2">
                             </div>
                         </div>
                     </form>-->
@@ -174,7 +173,22 @@
     <script src="/bootstrap/js/bootstrap.bundle.js"></script>
     <script src="/bootstrap-autocomplete/bootstrap-autocomplete.min.js"></script>
     <script src="/js/custom.js"></script>
+    <script>
+        function research(e) {
+            e.preventDefault();
+            option = $('#searchInput').val();
 
+            $.ajax({
+                url: "/api/search" + '?param=' + option,
+            }).done(function(result) {
+                $('#articlelist').empty();
+                for(let i = 0; i < result.length; i++){
+                    renderProduct(result[i]);
+                }
+            });
+        }
+
+    </script>
     {% block javascript %}
     {% endblock %}
 </body>

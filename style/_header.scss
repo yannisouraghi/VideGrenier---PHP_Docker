@@ -85,6 +85,10 @@ ul.menu {
     background-color: $c-divider;
   }
 
+  input:focus{
+    background-color: $c-divider;
+  }
+
   .input-group-addon {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 20px;

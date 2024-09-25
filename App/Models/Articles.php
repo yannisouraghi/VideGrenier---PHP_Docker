@@ -40,6 +40,21 @@ class Articles extends Model {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public static function getByName($name){
+
+        $db = static::getDB();
+
+        $name .= '%';
+
+        $stmt= $db->prepare('SELECT * FROM articles where name like :name');
+
+        $stmt->bindParam(':name', $name);
+
+        $stmt->execute();
+
+        return $stmt->fetchall(\PDO::FETCH_ASSOC);
+    }
+
     public static function getCountAll(){
         $db = static::getDB();
         $query = 'SELECT COUNT(*) FROM articles';
