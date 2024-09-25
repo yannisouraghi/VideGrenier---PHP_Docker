@@ -28,7 +28,7 @@ class Articles extends Model {
             case 'views':
                 $query .= ' ORDER BY articles.views DESC';
                 break;
-            case 'data':
+            case 'date':
                 $query .= ' ORDER BY articles.published_date DESC';
                 break;
             case '':
