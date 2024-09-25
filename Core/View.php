@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Utility\Auth;
+
 /**
  * View
  *
@@ -44,7 +46,7 @@ class View
         static $twig = null;
 
         if ($twig === null) {
-            $loader = new \Twig\Loader\Filesystemloader(dirname(__DIR__) . '/App/Views');
+            $loader = new \Twig\Loader\FilesystemLoader(dirname(__DIR__) . '/App/Views');
             $twig = new \Twig\Environment($loader, ['debug' => true,]);
             $twig->addExtension(new \Twig\Extension\DebugExtension());
         }
@@ -62,7 +64,7 @@ class View
     public static function setDefaultVariables($args = []){
 
         $args["user"] = isset($_SESSION['user']) ? $_SESSION['user'] : null;
-
+        $args["admin"] = Auth::checkIfUserIsAdmin();
         return $args;
     }
 }

@@ -1,0 +1,44 @@
+{
+  "name": "Vide Grenier",
+  "short_name": "App",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4CAF50",
+  "icons": [
+    {
+      "src": "/images/icons/suisse256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/icons/suisse512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "screenshots": [
+    {
+
+      "src": "images/capt1.png",
+      "sizes": "1896x903",
+      "type": "image/png",
+      "label": "ApplicationCapt1"
+    },
+    {
+
+      "src": "images/capt2.png",
+      "sizes": "1895x911",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "ApplicationCapt2"
+    },
+    {
+
+      "src": "images/capt3.png",
+      "sizes": "1897x908",
+      "type": "image/png",
+      "label": "ApplicationCapt3"
+    }
+  ]
+}

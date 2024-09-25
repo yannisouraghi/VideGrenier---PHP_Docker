@@ -1,0 +1,58 @@
+services:
+  web:
+    image: nginx:1.27.1-alpine
+    ports:
+      - "8080:80"
+    volumes:
+      - ../shared/nginx:/etc/nginx/templates
+      - ../../:/app
+    networks:
+      - internal
+
+  php-fpm:
+    image: project/php-fpm-composer:1.0.0
+    build:
+      context: ../shared/php-fpm
+    volumes:
+      - ../../:/app
+    env_file:
+      - .env
+    networks:
+      - internal
+
+  database:
+    image: mariadb
+    restart: always
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=true
+      - MARIADB_DATABASE=${DATABASE_NAME}
+      - MARIADB_USER=${DATABASE_USER}
+      - MARIADB_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - ../../sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - data:/var/lib/mysql
+    networks:
+      - internal
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - "8000:8080"
+    networks:
+      - internal
+
+  scss-compiler:
+    image: project/scss-compiler:1.0.0
+    build:
+      context: ../shared/sass-compiler
+    volumes:
+      - ../../style:/app/input
+      - ../../public/style:/app/output
+
+volumes:
+  data:
+
+networks:
+  internal:
+    driver: bridge

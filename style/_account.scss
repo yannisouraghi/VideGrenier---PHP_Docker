@@ -3,21 +3,25 @@
 */
 
 .bg-image {
+  background-image: url("/images/account.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
   text-align: center;
+
   img {
     width: 100%;
   }
 }
 
-.login-wraper{
+.login-wraper {
+  min-height: calc(100vh - $navbar-height);
   position: relative;
   .login-window {
     position: absolute;
     width: 570px;
     top: 50%;
-    left: 50%;
-    margin-left: -2px;
-    margin-top: -288px;
+    left: calc(50% + 50px);
+    transform: translateY(-50%);
     .l-head {
       background-color: $c-white;
 
@@ -28,7 +32,7 @@
       color: $c-caption;
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         background-color: #fbfdfe;
       }
     }
@@ -42,7 +46,7 @@
         font-weight: 500;
       }
       .btn {
-        @media only screen and(max-width: 767px) {
+        @media only screen and (max-width: 767px) {
           border-radius: 30px;
           padding-top: 16px;
           padding-bottom: 12px;
@@ -52,13 +56,13 @@
   }
   .checkbox {
     font-weight: normal;
-    @media only screen and(max-width: 767px) {
+    @media only screen and (max-width: 767px) {
       margin-bottom: 30px;
     }
     p {
       margin-bottom: 4px;
     }
-    .text2{
+    .text2 {
       display: block;
       font-size: $fs-sm;
       color: $c-light;
@@ -87,15 +91,12 @@
     }
     margin-top: 25px;
   }
-
 }
 
 .banner-text {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-top: -50px;
-  margin-left: -580px;
+  top: 30%;
+  right: calc(50% + 50px);
   width: 550px;
   .line {
     height: 1px;
@@ -125,7 +126,11 @@
   }
 }
 
-@media (min-width: 100px) and (max-width: 1365px) {
+@media (max-width: 1365px) {
+  .bg-image {
+    background: none;
+  }
+
   .banner-text {
     position: relative;
     top: 0;
@@ -151,18 +156,19 @@
   }
 
   .login-wraper {
+    padding: 0 20px;
     .login-window {
       position: relative;
+      transform: none;
       width: auto;
       top: 0;
       left: 0;
-      margin-left:0;
+      margin-left: 0;
       margin-top: 0;
-      .l-head{
+      .l-head {
         padding: 20px 10px;
       }
       .l-form {
-
         //text-align: left;
         //background-color: #fbfdfe;
         //border-bottom-left-radius: 3px;
@@ -171,8 +177,6 @@
       }
     }
   }
-
-
 }
 /*
 * Content Account END

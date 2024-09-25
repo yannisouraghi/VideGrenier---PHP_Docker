@@ -15,7 +15,6 @@ class Api extends \Core\Controller
 
     /**
      * Affiche la liste des articles / produits pour la page d'accueil
-     *
      * @throws Exception
      */
     public function ProductsAction()
@@ -30,12 +29,14 @@ class Api extends \Core\Controller
 
     /**
      * Recherche dans la liste des villes
-     *
      * @throws Exception
      */
     public function CitiesAction(){
-
-        $cities = Cities::search($_GET['query']);
+        try {
+            $cities = Cities::search($_GET['query']);
+        } catch (Exception $e) {
+            var_dump($e->getMessage());
+        }
 
         header('Content-Type: application/json');
         echo json_encode($cities);

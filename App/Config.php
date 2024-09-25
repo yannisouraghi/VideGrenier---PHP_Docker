@@ -9,34 +9,21 @@ namespace App;
  */
 class Config
 {
-
-    /**
-     * Database host
-     * @var string
-     */
-    const DB_HOST = 'localhost';
-
-    /**
-     * Database name
-     * @var string
-     */
-    const DB_NAME = 'videgrenierenligne';
-
-    /**
-     * Database user
-     * @var string
-     */
-    const DB_USER = 'webapplication';
-
-    /**
-     * Database password
-     * @var string
-     */
-    const DB_PASSWORD = '653rag9T';
-
     /**
      * Show or hide error messages on screen
      * @var boolean
      */
     const SHOW_ERRORS = true;
+
+    /**
+     * The remember cookie name.
+     * @var string
+     */
+    public const REMEMBER_COOKIE_NAME = "user";
+
+    /**
+     * The remember cookie expiry time.
+     * @var integer
+     */
+    public const REMEMBER_COOKIE_EXPIRY = 60 * 60 * 24 * 30;
 }

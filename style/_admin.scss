@@ -1,0 +1,52 @@
+/*
+* Content Admin
+*/
+
+.admin-dashboard {
+  padding: 40px 0;
+  min-height: calc(100vh - $navbar-height);
+
+  .admin-dashboard-data {
+    padding: 20px;
+    display: grid;
+
+    & > div {
+      display: flex;
+      align-items: flex-start;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+      border-radius: 8px;
+      border: 1px #ddd solid;
+
+      h2, p {
+        margin: 0;
+        padding: 0;
+      }
+
+      h2 {
+        opacity: .8;
+        font-size: 18px;
+        letter-spacing: .5px;
+      }
+
+      p {
+        font-size: 24px;
+        margin-top: 12px;
+        line-height: 20px;
+      }
+    }
+  }
+
+  .admin-user-table {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px #ddd solid;
+
+    td, th {
+      padding: 20px 80px 20px 20px;
+      min-width: 250px;
+    }
+  }
+}
