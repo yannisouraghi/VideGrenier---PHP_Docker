@@ -28,4 +28,4 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" \
 
 # COPY ./php.ini /usr/local/etc/php/
 
-# RUN usermod -u 1000 www-data
+RUN usermod -u 1000 www-data
