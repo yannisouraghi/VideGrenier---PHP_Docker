@@ -3,6 +3,8 @@
 namespace App\Controllers;
 
 use App\Models\Articles;
+use App\Models\Cities;
+use App\Utility\Flash;
 use App\Utility\Upload;
 use \Core\View;
 
@@ -20,28 +22,70 @@ class Product extends \Core\Controller
     {
 
         if(isset($_POST['submit'])) {
+            $result = self::addProduct();
 
-            try {
-                $f = $_POST;
-
-                // TODO: Validation
-
-                $f['user_id'] = $_SESSION['user']['id'];
-                $id = Articles::save($f);
-
-                $pictureName = Upload::uploadFile($_FILES['picture'], $id);
-
-                Articles::attachPicture($id, $pictureName);
-
-                header('Location: /product/' . $id);
-            } catch (\Exception $e){
-                    var_dump($e);
-            }
+           if($result){
+               return;
+           }
         }
 
-        View::renderTemplate('Product/Add.html');
+        View::renderTemplate('Product/Add.html', [
+            'message' => Flash::getMessage()
+        ]);
     }
 
+    public function addProduct(){
+        try {
+            $validation_errors = [];
+
+            if(empty($_POST['name']) || $_POST['name'] == '' || strlen($_POST['name']) > 200) {
+                $validation_errors[] = 'Le nom est requis et ne peut pas dépasser 200 caractères';
+            }
+
+            if(empty($_POST['description']) || $_POST['description'] == '') {
+                $validation_errors[] = 'La description est requise';
+            }
+
+            if(empty($_POST['city_id']) || $_POST['city_id'] == '') {
+                $validation_errors[] = 'La ville est requise';
+            }
+
+            if(empty($_FILES['picture'])) {
+                $validation_errors[] = "L'image est requis";
+            }
+
+            if (count($validation_errors) > 0) {
+                $validation_errors_string = "Une ou plusieurs erreurs sont survenues : \n";
+
+                foreach ($validation_errors as $error) {
+                    $validation_errors_string .= '- ' . $error . " \n";
+                }
+
+                Flash::danger($validation_errors_string);
+                return false;
+            }
+
+            $_POST['user_id'] = $_SESSION['user']['id'];
+
+            $city = Cities::getById($_POST['city_id']);
+
+            if(!isset($city)){
+                Flash::danger('Ville inconnu');
+                return false;
+            }
+
+            $id = Articles::save($_POST);
+            $pictureName = Upload::uploadFile($_FILES['picture'], $id);
+
+            Articles::attachPicture($id, $pictureName);
+            header('Location: /product/' . $id);
+            return true;
+        } catch (\Exception $e){
+            Flash::danger('Une erreur est survenue');
+            return false;
+        }
+
+    }
     /**
      * Affiche la page d'un produit
      * @return void
@@ -59,8 +103,9 @@ class Product extends \Core\Controller
         }
 
         View::renderTemplate('Product/Show.html', [
-            'article' => $article[0],
-            'suggestions' => $suggestions
+            'article' => $article,
+            'suggestions' => $suggestions,
+            'product_id' => $id,
         ]);
     }
 }

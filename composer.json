@@ -1,8 +1,13 @@
 {
     "require": {
         "twig/twig": "~3.0",
-      "ext-pdo": "*",
-      "ext-json": "*"
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "phpmailer/phpmailer": "^6.9",
+        "phpunit/phpunit": "^11.3.6"
+    },
+    "scripts": {
+        "test": "phpunit --bootstrap vendor/autoload.php tests"
     },
     "autoload": {
         "psr-4": {

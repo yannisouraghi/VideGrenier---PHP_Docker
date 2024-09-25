@@ -1,0 +1,44 @@
+services:
+  web:
+    image: project/nginx-prod:1.0.0
+    build:
+      context: .docker/shared/nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - project_files:/app
+    networks:
+      - internal
+
+  php-fpm:
+    image: project/php-fpm-composer:1.0.0
+    build:
+      context: .docker/shared/php-fpm
+    env_file:
+      - .env
+    volumes:
+      - project_files:/app
+    networks:
+      - internal
+
+  database:
+    image: mariadb
+    restart: always
+    environment:
+      - MARIADB_RANDOM_ROOT_PASSWORD=true
+      - MARIADB_DATABASE=${DATABASE_NAME}
+      - MARIADB_USER=${DATABASE_USER}
+      - MARIADB_PASSWORD=${DATABASE_PASSWORD}
+    volumes:
+      - ./sql/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - database_data:/var/lib/mysql
+    networks:
+      - internal
+
+volumes:
+  database_data:
+  project_files:
+
+networks:
+  internal:
+    driver: bridge

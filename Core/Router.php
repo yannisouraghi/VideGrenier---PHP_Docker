@@ -2,6 +2,8 @@
 
 namespace Core;
 
+use App\Utility\Auth;
+
 /**
  * Router
  *
@@ -113,8 +115,12 @@ class Router
 
             if (class_exists($controller)) {
 
-                if(isset($this->params['private']) && !isset($_SESSION['user']['id'])){
+                if(isset($this->params['private']) && !Auth::checkIfUserIsLoggedIn()){
                     throw new \Exception("You must be logged in");
+                }
+
+                if(isset($this->params['admin_only']) && !Auth::checkIfUserIsAdmin()){
+                    throw new \Exception("You must be admin to reach this page");
                 }
 
                 $controller_object = new $controller($this->params);

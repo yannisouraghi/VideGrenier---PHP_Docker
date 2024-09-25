@@ -4,12 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "watch": "node-sass -w style -o public/style",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "watch": "sass --watch --no-source-map ./style:./public/style",
+    "test": "echo \"Error: no test specifixed\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "node-sass": "^4.14.1"
+    "sass": "^1.77.2"
   }
 }

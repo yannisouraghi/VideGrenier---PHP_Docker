@@ -21,8 +21,6 @@
   text-align: center;
   color: $c-light;
   .u-area {
-    padding-top: 150px;
-    padding-bottom: 150px;
     i {
       font-size: 144px;
       color: $c-icon;
@@ -61,7 +59,6 @@
       margin-bottom: 7px;
     }
   }
-
 }
 
 .edit-page {
@@ -70,7 +67,7 @@
     padding-bottom: 30px;
     margin-bottom: 30px;
     border-bottom: solid 1px $c-divider;
-    @media only screen and(max-width: 767px) {
+    @media only screen and (max-width: 767px) {
       padding-bottom: 20px;
       margin-bottom: 20px;
     }
@@ -82,17 +79,17 @@
       padding-top: 25px;
       padding-bottom: 25px;
       color: $c-default;
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         padding-top: 15px;
         padding-bottom: 15px;
       }
     }
-    .imgplace{
+    .imgplace {
       background-color: #8781bd;
       border-radius: 3px;
       width: 100%;
       height: 113px;
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         height: 200px;
         margin-bottom: 15px;
       }
@@ -111,7 +108,7 @@
         position: absolute;
         top: 2px;
         right: 21px;
-        @media only screen and(max-width: 767px) {
+        @media only screen and (max-width: 767px) {
           right: 0;
           top: -36px;
         }
@@ -126,7 +123,7 @@
         background-color: $c-divider;
         -webkit-box-shadow: none;
         box-shadow: none;
-        @media only screen and(max-width: 767px) {
+        @media only screen and (max-width: 767px) {
           width: 100%;
         }
         .progress-bar {
@@ -145,7 +142,7 @@
       font-weight: normal;
     }
     .form-group {
-      @media only screen and(max-width: 767px) {
+      @media only screen and (max-width: 767px) {
         margin-bottom: 20px;
       }
     }
@@ -156,7 +153,7 @@
       color: #2e2e2e !important;
       padding-bottom: 6px;
     }
-    input[type=checkbox] {
+    input[type="checkbox"] {
       height: 19px;
       width: 19px;
       margin: 0;
@@ -172,8 +169,6 @@
   }
   .u-area {
     text-align: center;
-    padding-top: 65px;
-    padding-bottom: 20px;
     .u-btn {
       margin-top: 0;
     }
@@ -186,8 +181,6 @@
 @media only screen and (max-width: 767px) {
   .upload-page {
     .u-area {
-      padding-top: 90px;
-      padding-bottom: 50px;
       &.mt-small {
         padding-top: 20px;
       }
