@@ -29,4 +29,4 @@ COPY --from=composer --chown=nginx:nginx /app /app
 COPY --from=scss-compiler --chown=nginx:nginx /app/public/style /app/public/style
 COPY --chown=nginx:nginx .docker/shared/nginx /etc/nginx/templates
 
-RUN chmod -R 766 /app
+RUN chmod -R 777 /app/public/storage
