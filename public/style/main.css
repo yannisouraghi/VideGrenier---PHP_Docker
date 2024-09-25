@@ -1415,6 +1415,9 @@ ul.menu ul li:not(:last-child) {
   border: none;
   background-color: #eceff0;
 }
+.topsearch input:focus {
+  background-color: #eceff0;
+}
 .topsearch .input-group-addon {
   border-top-left-radius: 0px;
   border-bottom-left-radius: 20px;
