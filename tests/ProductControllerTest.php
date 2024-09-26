@@ -56,6 +56,7 @@ class ProductControllerTest extends TestCase
 
         // Then
         $this->assertTrue($product->addProduct());
+        $this->assertNull(Flash::getMessage());
     }
 
     public function testAddProductNameError()
