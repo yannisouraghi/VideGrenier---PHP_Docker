@@ -92,10 +92,11 @@ ul.menu {
   .input-group-addon {
     border-top-left-radius: 0px;
     border-bottom-left-radius: 20px;
+    display: flex;
+    align-items: center;
     i {
       font-size: 18px;
-      padding-left: 3px;
-      padding-top: 3px;
+      padding: 0 10px;
       color: $c-icon;
     }
   }

@@ -1,6 +1,6 @@
 services:
   web:
-    image: project/nginx-prod:1.0.0
+    image: matheoeg/cesi-docker-nginx:1.0.0
     build:
       context: .docker/shared/nginx
     ports:
