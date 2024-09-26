@@ -1,6 +1,6 @@
 services:
   web:
-    image: matheoeg/cesi-docker-nginx:1.0.0
+    image: matheoeg/cesi-docker-nginx:1.1.0-RC
     build:
       context: ../shared/nginx
     ports:
