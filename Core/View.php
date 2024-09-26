@@ -65,6 +65,7 @@ class View
 
         $args["user"] = isset($_SESSION['user']) ? $_SESSION['user'] : null;
         $args["admin"] = Auth::checkIfUserIsAdmin();
+        $args["route"] = $_SERVER["QUERY_STRING"];
         return $args;
     }
 }
