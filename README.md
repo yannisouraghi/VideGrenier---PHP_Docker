@@ -6,17 +6,18 @@ Ce Readme.md est à destination des futurs repreneurs du site-web Vide Grenier e
 
 - Docker engine > 27.2.1 ([https://docs.docker.com/engine/install/](https://docs.docker.com/engine/install/))
 
+## Build & push de l'image docker pour prod & stage
+
+```bash
+docker build -t matheoeg/cesi-docker-nginx:1.0.0 -f .docker/shared/nginx/Dockerfile .
+docker push matheoeg/cesi-docker-nginx:1.0.0
+```
+
 ## Démarrage du projet en prod
 
 1. Copy `.env.default` to `.env` and edit environment variables
 
-2. Build l'image docker de prod
-
-```bash
-docker build -t project/nginx-prod:1.0.0 -f .docker/shared/nginx/Dockerfile .
-```
-
-3. Lancez la commande
+2. Lancez la commande
 
 ```bash
 docker compose up
@@ -26,13 +27,7 @@ docker compose up
 
 1. Copy `.docker/stage/.env.default` to `.docker/stage/.env` and edit environment variables
 
-2. Build l'image docker de prod
-
-```bash
-docker build -t project/nginx-prod:1.0.0 -f .docker/shared/nginx/Dockerfile .
-```
-
-3. Lancez la commande
+2. Lancez la commande
 
 ```bash
 docker compose -f .docker/stage/docker-compose.yml up -d
