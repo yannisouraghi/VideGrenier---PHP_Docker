@@ -8,7 +8,7 @@ use Core\Model;
  * City Model:
  */
 class Cities extends Model {
-    public static function search($str) {
+    public function search($str) {
         $db = static::getDB();
 
         $str = strtolower($str);
@@ -24,7 +24,7 @@ class Cities extends Model {
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
-    public static function getById($id) {
+    public function getById($id) {
         $db = static::getDB();
         $stmt = $db->prepare('SELECT * FROM villes_france WHERE ville_id = :id');
         $stmt->execute(['id' => $id]);

@@ -145,7 +145,7 @@ class Articles extends Model {
      * @return string|boolean
      * @throws Exception
      */
-    public static function save($data) {
+    public function save($data) {
         $db = static::getDB();
 
         $stmt = $db->prepare('INSERT INTO articles(name, description, user_id, published_date, city_id) VALUES (:name, :description, :user_id, :published_date, :city_id)');
@@ -163,7 +163,7 @@ class Articles extends Model {
         return $db->lastInsertId();
     }
 
-    public static function attachPicture($articleId, $pictureName){
+    public function attachPicture($articleId, $pictureName){
         $db = static::getDB();
 
         $stmt = $db->prepare('UPDATE articles SET picture = :picture WHERE articles.id = :articleid');

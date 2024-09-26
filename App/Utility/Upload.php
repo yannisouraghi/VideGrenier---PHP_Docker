@@ -3,9 +3,7 @@
 namespace App\Utility;
 
 class Upload {
-
-
-    public static function uploadFile($file, $fileName)
+    public function uploadFile($file, $fileName)
     {
         $currentDirectory = getcwd();
         $uploadDirectory = "/storage/";

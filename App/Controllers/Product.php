@@ -13,12 +13,38 @@ use \Core\View;
  */
 class Product extends \Core\Controller
 {
+    public Cities $citiesModel;
+    public Upload $uploadUtility;
+    public Articles $articlesModel;
+
+    public function __construct($route_params)
+    {
+        parent::__construct($route_params);
+        $this->citiesModel = new Cities();
+        $this->uploadUtility = new Upload();
+        $this->articlesModel = new Articles();
+    }
+
+    public function setCitiesModel($model): void
+    {
+        $this->citiesModel = $model;
+    }
+
+    public function setUploadUtility($uploadUtility): void
+    {
+        $this->uploadUtility = $uploadUtility;
+    }
+
+    public function setArticlesModel($articlesModel): void
+    {
+        $this->articlesModel = $articlesModel;
+    }
 
     /**
      * Affiche la page d'ajout
      * @return void
      */
-    public function indexAction()
+    public function indexAction(): void
     {
 
         if(isset($_POST['submit'])) {
@@ -34,7 +60,8 @@ class Product extends \Core\Controller
         ]);
     }
 
-    public function addProduct(){
+    public function addProduct(): bool
+    {
         try {
             $validation_errors = [];
 
@@ -67,17 +94,17 @@ class Product extends \Core\Controller
 
             $_POST['user_id'] = $_SESSION['user']['id'];
 
-            $city = Cities::getById($_POST['city_id']);
+            $city = $this->citiesModel->getById($_POST['city_id']);
 
             if(!isset($city)){
                 Flash::danger('Ville inconnu');
                 return false;
             }
 
-            $id = Articles::save($_POST);
-            $pictureName = Upload::uploadFile($_FILES['picture'], $id);
+            $id = $this->articlesModel->save($_POST);
+            $pictureName = $this->uploadUtility->uploadFile($_FILES['picture'], $id);
 
-            Articles::attachPicture($id, $pictureName);
+            $this->articlesModel->attachPicture($id, $pictureName);
             header('Location: /product/' . $id);
             return true;
         } catch (\Exception $e){
@@ -90,7 +117,7 @@ class Product extends \Core\Controller
      * Affiche la page d'un produit
      * @return void
      */
-    public function showAction()
+    public function showAction(): void
     {
         $id = $this->route_params['id'];
 

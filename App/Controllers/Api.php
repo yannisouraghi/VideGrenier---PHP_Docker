@@ -33,7 +33,8 @@ class Api extends \Core\Controller
      */
     public function CitiesAction(){
         try {
-            $cities = Cities::search($_GET['query']);
+            $citiesModel = new Cities();
+            $cities = $citiesModel->search($_GET['query']);
         } catch (Exception $e) {
             var_dump($e->getMessage());
         }
